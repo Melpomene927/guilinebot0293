@@ -21,6 +21,26 @@ def getDBData():
     finally:
         conn.close()
 
+def writeDBData(sqlStr):
+    if not os.path.exists(dbname):
+        print('Db is not exists')
+        return
+    
+    try:
+        conn=sqlite3.connect(dbname)
+        cur=conn.cursor()
+
+        cur.execute(sqlStr)
+        conn.commit()
+        print('Db write OK!')
+    except Exception as e:
+        print(e)
+    finally:
+        conn.close()
+
+
+
+
 if __name__ == '__main__':
     datas=getDBData()
     print(datas)

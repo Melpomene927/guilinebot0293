@@ -1,16 +1,27 @@
-<html>
-<head><title>歡迎光臨</title></head>
-<body>
-<h2>訪客:{{name}}</h2>
-<p>目前時間為:{{time}}</p>
-<div><a href="./pm25">pm2.5</a></div>
-<div><a href='./pm25chart'>pm2.5 chart</a></div>
-<div><a href='./chart'>chart</a></div>
-<div><a href='./stock'>stock</a></div>
-<div><a href='./test_html'>TEST</a></div>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block content %}
+<div class="container">
+    
+    <table class="table">
+        <thead>
+            <th>
+                <h2>訪客:{{name}}</h2>
+                <p>目前時間為:{{time}}</p>
+            </th>
+        </thead>
+        <tbody>
+            <tr><td><a href="./pm25">pm2.5</a></td></tr>
+            <tr><td><a href='./pm25chart'>pm2.5 chart</a></td></tr>
+            <tr><td><a href='./chart'>chart</a></td></tr>
+            <tr><td><a href='./stock'>stock</a></td></tr>
+            <tr><td><a href='./test_html'>TEST</a></td></tr>
+            <tr><td><a href='./storechart'>Store Chart</a></td></tr>
+            <tr><td><a href='./inputForm'>Input form</a></td></tr>
+        </tbody>
+    </table>
+</div>
+{% endblock content %}
 
 
 

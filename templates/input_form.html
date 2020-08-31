@@ -1,0 +1,25 @@
+<html>
+<body>    
+    <h1>{{title}}</h1>
+    <form action="" method="post" validate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.name.label }}<br>
+            {{ form.name(size=32) }}          
+        </p>
+        <p>
+            {{ form.qty.label }}<br>
+            {{ form.qty(size=32) }}
+        </p>
+        <p>
+            {{ form.stock.label }}<br>
+            {{ form.stock(size=32) }}
+        </p>     
+        <p>{{ form.submit() }}</p>
+        
+    </form>
+    <p>{{status}}</p>
+    <p><a id="index" href="/index">回首頁</a></p>
+    <p><a id="storechart" href="/storechart">圖表</a></p>    
+</body>
+</html>
