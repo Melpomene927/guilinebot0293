@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js 這裏使用flask的url_for-->
+    <script src="{{ url_for('static', filename='./js/echarts.min.js') }}"></script>
+</head>
+<body>
+    <!-- 爲ECharts準備一個具備大小（寬高）的Dom -->
+    <div id="main" style="width: 600px;height:400px;"></div>
+    <script type="text/javascript">
+        // 基于準備好的dom，初始化echarts實例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定圖表的配置項和資料
+        var option = {
+            title: {
+                text: 'ECharts 圖像繪製'
+            },
+            tooltip: {},
+            legend: {
+                data:['銷量']
+            },
+            xAxis: {
+                data: ["襯衫","羊毛衫","雪紡衫","褲子","高跟鞋","襪子"]
+            },
+            yAxis: {},
+            series: [{
+                name: '銷量',
+                type: 'bar',
+                data: [5, 20, 36, 10, 10, 20]
+            }]
+        };
+
+        // 使用剛指定的配置項和資料顯示圖表。
+        myChart.setOption(option);
+    </script>
+</body>
+</html>
