@@ -52,7 +52,7 @@ def pm25char():
 def char():
     return render_template('my_template.html',**locals())
 
-@app.route('/getPm25Data',methods=["POST"])
+@app.route('/getPm25Data',methods=["GET","POST"])
 def getPm25Data():
     if request.method=="POST":
         name=[]
@@ -69,17 +69,23 @@ def getPm25Data():
 
     return (json.dumps(dict1,ensure_ascii=False))
 
-@app.route('/getSqlData',method=["GET","POST"])
-def getSqlData():
+@app.route('/getDBData',methods=["GET","POST"])
+def getDBData():
     data={}
     if request.method =='POST':
         res = sqlData.getDBData()
-        print(res)
         data['name']=[x[0] for x in res]
         data['qty']=[x[1] for x in res]
         data['stock']=[x[2] for x in res]
-    return (json.dumps(data,ensure_ascii=False))
+        return (json.dumps(data,ensure_ascii=False))
+    if request.method == 'GET':
+        res=sqlData.getDBData()
+        print(res)
+        return f'{res}'
 
+@app.route('/storechar')
+def storechart():
+    return render_template("storechart.html")
 
 if __name__ == '__main__':
     app.run(debug=True)

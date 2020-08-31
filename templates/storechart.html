@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>圖表繪製</title>
+    <!--引入echarts.js-->
+    <script src="../static/js/echarts.min.js"></script>
+    <!--引入jquery.js-->
+    <script src="../static/js/jquery-3.5.1.min.js"></script>
+ 
+</head>
+<body>
+ 
+ <!-- 為ECharts準備一個有所大小（寬高）的Dom -->
+<div id="main" style="width: 800px;height:500px;margin: 0 auto;"></div>
+ <script type="text/javascript"> 
+    var myChart = echarts.init(document.getElementById('main')); 
+    var app = {
+        name:[],
+        qty:[],
+        stock:[]
+    }; 
+    //發送ajax請求，從後台獲取json數據
+    $(document).ready(function () {
+       getData();    
+    }); 
+    function getData() {
+         $.ajax({
+            url:'/getDBData',
+            data:{},
+            type:'POST',
+            async:false,
+            dataType:'json',
+            success:function(data) {
+                app.name = data.name;
+                app.qty =data.qty;
+                app.stock=data.stock;
+                myChart.setOption({
+                    title: {
+                        text: '小米商店銷售表'
+                    },
+                    tooltip: {},
+                    legend: {
+                        data:['銷售量']
+                    },
+                    xAxis: {
+                        data: app.name,
+                        axisLabel: {
+                             interval: 0,
+                                rotate: 0 //If the label names are too long you can manage this by rotating the label.
+                        }
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: '銷售量',
+                        type: 'bar',
+                        data: app.qty
+                    }]
+                })
+            },
+            error:function (msg) {
+                console.log(msg);
+                alert('系統發生錯誤!');
+            }
+        })
+    };
+ 
+</script>
+
+</body>
+</html>

@@ -1,6 +1,6 @@
 import sqlite3, os
 
-dbname='item.db'
+dbname='items.db'
 table='data'
 
 def getDBData():
@@ -10,9 +10,9 @@ def getDBData():
     
     try:
         conn=sqlite3.connect(dbname)
-        sqlStr = f"select * from {table}"
-        cur = conn.cursor(sqlStr)
+        cur = conn.cursor()
 
+        sqlStr = f"select * from {table}"
         datas=list(cur.execute(sqlStr))
         return datas
     except Exception as e:
@@ -20,3 +20,7 @@ def getDBData():
         return None
     finally:
         conn.close()
+
+if __name__ == '__main__':
+    datas=getDBData()
+    print(datas)
